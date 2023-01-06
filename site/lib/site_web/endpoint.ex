@@ -7,7 +7,8 @@ defmodule SiteWeb.Endpoint do
   @session_options [
     store: :cookie,
     key: "_site_key",
-    signing_salt: "3h2jAZ6X"
+    signing_salt: "3h2jAZ6X",
+    same_site: "Strict"
   ]
 
   socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
