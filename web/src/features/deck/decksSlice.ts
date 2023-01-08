@@ -28,7 +28,7 @@ export interface DecksState {
   };
 }
 
-// const initialState: DeckState = {
+// const initialState: DecksState = {
 //     deck: {},
 //     card: {}
 // };
@@ -37,7 +37,7 @@ const initialState: DecksState = testDecksData;
 
 export const decksSlice = createSlice({
   name: "decks",
-  initialState: initialState,
+  initialState,
   reducers: {
     createCard: {
       reducer(state, action: PayloadAction<Card>) {

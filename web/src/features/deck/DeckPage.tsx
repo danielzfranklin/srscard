@@ -8,16 +8,14 @@ import {
   deleteCard,
   selectCardList,
   selectDeck,
-  selectNextCard,
 } from "./decksSlice";
 import { useAppDispatch, useAppSelector, useAppStore } from "../../app/hooks";
-import { AppButton } from "../AppButton";
+import { useParams } from "react-router-dom";
 
-export interface DeckProps {
-  deck: UUID;
-}
+export function DeckPage() {
+  const params = useParams();
+  const deckId = params.deck!;
 
-export function Deck({ deck: deckId }: DeckProps) {
   const dispatch = useAppDispatch();
   const store = useAppStore();
   const [activeCard, setActiveCard] = useState<UUID | undefined>(undefined);
@@ -43,26 +41,22 @@ export function Deck({ deck: deckId }: DeckProps) {
   };
 
   return (
-    <div className="grid h-full grid-rows-[min-content_1fr] gap-y-2 p-4">
-      <h2>{deck.name}</h2>
-
-      <div className="grid grid-cols-[auto_500px] gap-x-4">
-        <CardList
+    <div className="grid h-full grid-cols-[auto_500px] gap-x-4 p-4">
+      <CardList
+        deck={deckId}
+        activeCard={activeCard}
+        setActiveCard={setActiveCard}
+        addCard={addCard}
+      />
+      {activeCard !== undefined ? (
+        <CardEdit
           deck={deckId}
-          activeCard={activeCard}
-          setActiveCard={setActiveCard}
-          addCard={addCard}
+          card={activeCard}
+          deleteCard={deleteActiveCard}
         />
-        {activeCard !== undefined ? (
-          <CardEdit
-            deck={deckId}
-            card={activeCard}
-            deleteCard={deleteActiveCard}
-          />
-        ) : (
-          <div></div>
-        )}
-      </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }
