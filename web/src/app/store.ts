@@ -3,11 +3,13 @@ import { v4 as uuidv4 } from "uuid";
 
 import counterReducer from "../features/counter/counterSlice";
 import decksReducer from "../features/deck/decksSlice";
+import studyReducer from "../features/study/studySlice";
 
 export const store = configureStore({
   reducer: {
     decks: decksReducer,
     counter: counterReducer,
+    study: studyReducer,
   },
 });
 

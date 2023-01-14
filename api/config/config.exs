@@ -7,17 +7,17 @@
 # General application configuration
 import Config
 
-config :site,
-  ecto_repos: [Site.Repo]
+config :api,
+  ecto_repos: [Api.Repo]
 
 # Configures the endpoint
-config :site, SiteWeb.Endpoint,
+config :api, ApiWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: SiteWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: Site.PubSub,
-  live_view: [signing_salt: "kttjoH9U"]
+  render_errors: [view: ApiWeb.ErrorView, accepts: ~w(json), layout: false],
+  pubsub_server: Api.PubSub,
+  live_view: [signing_salt: "EKz3eEr6"]
 
-config :site, :generators, binary_id: true
+config :api, :generators, binary_id: true
 
 # Configures the mailer
 #
@@ -26,20 +26,10 @@ config :site, :generators, binary_id: true
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :site, Site.Mailer, adapter: Swoosh.Adapters.Local
+config :api, Api.Mailer, adapter: Swoosh.Adapters.Local
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
-
-# Configure esbuild (the version is required)
-config :esbuild,
-  version: "0.14.29",
-  default: [
-    args:
-      ~w(js/app.jsx --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
-    cd: Path.expand("../assets", __DIR__),
-    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
-  ]
 
 # Configures Elixir's Logger
 config :logger, :console,

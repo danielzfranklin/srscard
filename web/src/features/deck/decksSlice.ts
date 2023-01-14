@@ -3,6 +3,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { EpochMillis, RootState, UUID, uuid } from "../../app/store";
 import testDecksData from "./testDecksData";
 
+// TODO: Add the note/card distinction so we can have things like "(and reversed card)"
+
 export interface Deck {
   id: UUID;
   name: UUID;
